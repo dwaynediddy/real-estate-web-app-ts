@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Flex, Box, Text, Button } from '@chakra-ui/react'
 
+import { baseUrl, fetchApi } from '../utils/fetchApi'
+
 interface bannerProps {
   purpose: string,
   title1: string,
@@ -11,6 +13,11 @@ interface bannerProps {
   desc2: string,
   imageUrl: string
   linkName: string,
+}
+
+interface fetchingProps { 
+  propertiesForSale: string, 
+  propertiesForRent: string
 }
 
 const Banner = ({ purpose, title1, title2, buttonText, desc1, desc2, imageUrl,  linkName }: bannerProps) =>  ( 
@@ -28,10 +35,10 @@ const Banner = ({ purpose, title1, title2, buttonText, desc1, desc2, imageUrl,  
 )
 
 
-export default function Home() {
+export default function Home({ propertiesForSale, propertiesForRent}: fetchingProps) {
+  console.log(propertiesForSale, propertiesForRent)
   return (
-    <div>
-      <h1>Hello world</h1>
+    <Box>
       <Banner 
         purpose='RENT A HOME'
         title1="rental homes for"
@@ -42,6 +49,11 @@ export default function Home() {
         linkName='/search?purpose=for-rent'
         imageUrl="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8aG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
         />
+
+      <Flex flexWrap="wrap">
+
+      </Flex>
+
       <Banner 
         purpose=' BUY A HOME'
         title1="find buy and own"
@@ -52,6 +64,22 @@ export default function Home() {
         linkName='/search?purpose=for-sale'
         imageUrl="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
       />
-    </div>
+
+      <Flex flexWrap="wrap">
+
+      </Flex>
+    </Box>
   )
+}
+
+export async function getStaticProps() {
+  const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`)
+  const propertyForRent = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`)
+
+  return {
+    props: {
+      propertiesForSale: propertyForSale?.hits,
+      propertiesForRent: propertyForRent?.hits,
+    }
+  }
 }
