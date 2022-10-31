@@ -16,8 +16,8 @@ interface bannerProps {
 }
 
 interface fetchingProps { 
-  propertiesForSale: string, 
-  propertiesForRent: string
+  propertiesForSale: [], 
+  propertiesForRent: []
 }
 
 const Banner = ({ purpose, title1, title2, buttonText, desc1, desc2, imageUrl,  linkName }: bannerProps) =>  ( 
@@ -51,7 +51,9 @@ export default function Home({ propertiesForSale, propertiesForRent}: fetchingPr
         />
 
       <Flex flexWrap="wrap">
+        {propertiesForRent.map((propertyForRent) => {
 
+        })}
       </Flex>
 
       <Banner 
@@ -66,7 +68,7 @@ export default function Home({ propertiesForSale, propertiesForRent}: fetchingPr
       />
 
       <Flex flexWrap="wrap">
-
+        {propertiesForSale}
       </Flex>
     </Box>
   )
