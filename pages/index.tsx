@@ -2,7 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Flex, Box, Text, Button } from '@chakra-ui/react'
 
+
 import { baseUrl, fetchApi } from '../utils/fetchApi'
+import Property from '../components/Property'
 
 interface bannerProps {
   purpose: string,
@@ -17,7 +19,8 @@ interface bannerProps {
 
 interface fetchingProps { 
   propertiesForSale: [], 
-  propertiesForRent: []
+  propertiesForRent: [],
+  id: string
 }
 
 const Banner = ({ purpose, title1, title2, buttonText, desc1, desc2, imageUrl,  linkName }: bannerProps) =>  ( 
@@ -41,7 +44,7 @@ export default function Home({ propertiesForSale, propertiesForRent}: fetchingPr
     <Box>
       <Banner 
         purpose='RENT A HOME'
-        title1="rental homes for"
+        title1="Rental homes for"
         title2="EVERYONE"
         buttonText="Explore rentals"
         desc1="Explore houses, apartments, villas"
@@ -51,15 +54,13 @@ export default function Home({ propertiesForSale, propertiesForRent}: fetchingPr
         />
 
       <Flex flexWrap="wrap">
-        {propertiesForRent.map((propertyForRent) => {
-
-        })}
+        {propertiesForRent.map((property: fetchingProps) => <Property property={property} key={property.id}/>)}
       </Flex>
 
       <Banner 
         purpose=' BUY A HOME'
-        title1="find buy and own"
-        title2="your dream home"
+        title1="Find, buy and own"
+        title2="Your dream home"
         buttonText="Dream home"
         desc1="Explore houses, apartments, villas"
         desc2="and more..."
@@ -68,7 +69,7 @@ export default function Home({ propertiesForSale, propertiesForRent}: fetchingPr
       />
 
       <Flex flexWrap="wrap">
-        {propertiesForSale}
+        {propertiesForSale.map((property: fetchingProps) => <Property property={property} key={property.id}/>)}
       </Flex>
     </Box>
   )
