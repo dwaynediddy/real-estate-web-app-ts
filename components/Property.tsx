@@ -9,7 +9,7 @@ import millify from "millify"
 
 import DefaultImage from "../assets/default.png"
 
-interface propertyProps { 
+export interface PropertyProps { 
   property: {
   coverPhoto: any, 
   price: number, 
@@ -20,12 +20,12 @@ interface propertyProps {
   area: number, 
   agency: any, 
   isVerified: boolean, 
-  externalID: string
+  externalID: string,
   }
 }
 
 
-const Property = ({ property: {coverPhoto, price, rentFrequency, rooms, title, baths, area, agency, isVerified, externalID}}: propertyProps) => {
+const Property = ({ property: {coverPhoto, price, rentFrequency, rooms, title, baths, area, agency, isVerified, externalID}}: PropertyProps) => {
   return (
     <Link href={`/property/${externalID}`} passHref>
     <Flex flexWrap='wrap' w='420px' p='5' paddingTop='0px' justifyContent='flex-start' cursor='pointer' >

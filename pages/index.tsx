@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Flex, Box, Text, Button } from '@chakra-ui/react'
 
-
 import { baseUrl, fetchApi } from '../utils/fetchApi'
 import Property from '../components/Property'
 
@@ -20,7 +19,19 @@ interface bannerProps {
 interface fetchingProps { 
   propertiesForSale: [], 
   propertiesForRent: [],
-  id: string
+  id: string,
+
+  // should be propertyProps
+  coverPhoto: any, 
+  price: number, 
+  rentFrequency: string, 
+  rooms: number, 
+  title: string, 
+  baths: number, 
+  area: number, 
+  agency: any, 
+  isVerified: boolean, 
+  externalID: string,
 }
 
 const Banner = ({ purpose, title1, title2, buttonText, desc1, desc2, imageUrl,  linkName }: bannerProps) =>  ( 
@@ -38,7 +49,7 @@ const Banner = ({ purpose, title1, title2, buttonText, desc1, desc2, imageUrl,  
 )
 
 
-export default function Home({ propertiesForSale, propertiesForRent}: fetchingProps) {
+export default function Home({ propertiesForSale, propertiesForRent }: fetchingProps) {
   console.log(propertiesForSale, propertiesForRent)
   return (
     <Box>
@@ -54,7 +65,7 @@ export default function Home({ propertiesForSale, propertiesForRent}: fetchingPr
         />
 
       <Flex flexWrap="wrap">
-        {propertiesForRent.map((property: fetchingProps) => <Property property={property} key={property.id}/>)}
+        {propertiesForRent.map((property: fetchingProps ) => <Property property={property} key={property.id}/>)}
       </Flex>
 
       <Banner 
