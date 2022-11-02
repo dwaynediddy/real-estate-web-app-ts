@@ -69,7 +69,7 @@ export default function Home({ propertiesForSale, propertiesForRent }: fetchingP
       </Flex>
 
       <Banner 
-        purpose=' BUY A HOME'
+        purpose='BUY A HOME'
         title1="Find, buy and own"
         title2="Your dream home"
         buttonText="Dream home"
